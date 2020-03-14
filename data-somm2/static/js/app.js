@@ -34,41 +34,59 @@ function buildCharts(sample) {
       data.points = +data.points;
     });
 
-    // // @TODO: Build a Bubble Chart using the sample data
-    // var trace1 = {
-    //   x: sampleInput.points,
-    //   y: sampleInput.price,
-    //   mode: 'markers',
-    //   marker: {
-    //     size: sampleInput.price,
-    //     color: sampleInput.country
-    //   },
-    //   text:sampleInput.province
+    var pointsArr = [];
+    var countryArr = [];
+    var provinceArr = [];
+    var priceArr =[];
+
+    for (i = 0; i < 100; i++){
+      if(typeof sampleInput[i] !== "undefined"){
+        pointsArr.push(sampleInput[i].points)
+        console.log(sampleInput[i].points)
+        countryArr.push(sampleInput[i].country)
+        console.log(sampleInput[i].country)
+        provinceArr.push(sampleInput[i].province)
+        console.log(sampleInput[i].province)
+        priceArr.push(sampleInput[i].price)
+        console.log(sampleInput[i].price)
+      }
+
+
+    };
+    console.log(pointsArr);
+    console.log(countryArr);
+    console.log(provinceArr);
+    console.log(priceArr);
+
+    // @TODO: Build a Bubble Chart using the sample data
+    var trace1 = {
+      x: pointsArr,
+      y: priceArr,
+      mode: 'markers',
+      marker: {
+        size: priceArr,
+        color: countryArr
+      },
+      text:provinceArr
+    };
+    
+    var dataBubble = [trace1];
+    
+    // var layoutBubble = {
+    //   title: 'Marker Size',
+    //   showlegend: false,
+    //   height: 600,
+    //   width: 600
     // };
     
-    // var dataBubble = [trace1];
-    
-    // // var layoutBubble = {
-    // //   title: 'Marker Size',
-    // //   showlegend: false,
-    // //   height: 600,
-    // //   width: 600
-    // // };
-    
-    // Plotly.newPlot('bubble', dataBubble);
+    Plotly.newPlot('bubble', dataBubble);
     // @TODO: Build a Pie Chart
     
-      for (i = 0; i < 100; i++){
-        console.log(sampleInput[i].points)}
-        ;
-    
-    
-        // loop through each value to create list to for chart
       
     var data = [{
-      values: sampleInput[0].points,
-      labels: sampleInput[0].country,
-      hoverinfo:sampleInput[0].province,
+      values: pointsArr,
+      labels: countryArr,
+      hoverinfo:provinceArr,
       type: 'pie'
     }];
     

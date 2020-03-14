@@ -51,7 +51,7 @@ def variety():
 
 @app.route("/samples/<sample>")
 def samples(sample):
-    wine_reviews = list(mongo.db.wineJson.find({"variety":sample},{"_id":0}).limit(100))
+    wine_reviews = list(mongo.db.wineJson.find({"variety":sample},{"_id":0}).limit(500))
 
 
     return jsonify(wine_reviews)
