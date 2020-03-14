@@ -16,8 +16,6 @@ function buildMetadata(sample) {
     });
     // this will return each row of grape, need to groupby grape
    
-    
-    
   }
 
 
@@ -42,21 +40,21 @@ function buildCharts(sample) {
     for (i = 0; i < 100; i++){
       if(typeof sampleInput[i] !== "undefined"){
         pointsArr.push(sampleInput[i].points)
-        console.log(sampleInput[i].points)
+        // console.log(sampleInput[i].points)
         countryArr.push(sampleInput[i].country)
-        console.log(sampleInput[i].country)
+        // console.log(sampleInput[i].country)
         provinceArr.push(sampleInput[i].province)
-        console.log(sampleInput[i].province)
+        // console.log(sampleInput[i].province)
         priceArr.push(sampleInput[i].price)
-        console.log(sampleInput[i].price)
+        // console.log(sampleInput[i].price)
       }
 
 
     };
-    console.log(pointsArr);
-    console.log(countryArr);
-    console.log(provinceArr);
-    console.log(priceArr);
+    // console.log(pointsArr);
+    // console.log(countryArr);
+    // console.log(provinceArr);
+    // console.log(priceArr);
 
     // @TODO: Build a Bubble Chart using the sample data
     var trace1 = {
@@ -72,14 +70,23 @@ function buildCharts(sample) {
     
     var dataBubble = [trace1];
     
-    // var layoutBubble = {
-    //   title: 'Marker Size',
-    //   showlegend: false,
-    //   height: 600,
-    //   width: 600
-    // };
+    var layoutBubble = {
+      title: {
+        text:'Price vs. Points'
+      },
+      xaxis: {
+        title: {
+          text: 'Points (Out of 100)'
+        },
+      },
+      yaxis: {
+        title: {
+          text: 'Price in USD'
+        },
+      },
+    };
     
-    Plotly.newPlot('bubble', dataBubble);
+    Plotly.newPlot('bubble', dataBubble,layoutBubble);
     // @TODO: Build a Pie Chart
     
       
@@ -90,24 +97,17 @@ function buildCharts(sample) {
       type: 'pie'
     }];
     
-    // var layout = {
-    //   height: 400,
-    //   width: 500
-    // };
+    var layout = {
+      title: {
+        text:'% of Country'
+      },
+    };
     
-    Plotly.newPlot('pie', data);
-    // HINT: You will need to use slice() to grab the top 10 sample_values,
-    // otu_ids, and labels (10 each).
- 
+    Plotly.newPlot('pie', data,layout);
+
   }
   )
 }
-
-
-
-
-// build a world cloud function here
-
 
 
 
@@ -146,72 +146,3 @@ init();
 
 
 
-
-
-
-
-
-
-
-
-
-// // New homeworks set up for reference 
-
-// function buildMetadata(sample) {
-
-//   // @TODO: Complete the following function that builds the metadata panel
-
-//   // Use `d3.json` to fetch the metadata for a sample
-//     // Use d3 to select the panel with id of `#sample-metadata`
-
-//     // Use `.html("") to clear any existing metadata
-
-//     // Use `Object.entries` to add each key and value pair to the panel
-//     // Hint: Inside the loop, you will need to use d3 to append new
-//     // tags for each key-value in the metadata.
-
-//     // BONUS: Build the Gauge Chart
-//     // buildGauge(data.WFREQ);
-// }
-
-// function buildCharts(sample) {
-
-//   // @TODO: Use `d3.json` to fetch the sample data for the plots
-
-//     // @TODO: Build a Bubble Chart using the sample data
-
-//     // @TODO: Build a Pie Chart
-//     // HINT: You will need to use slice() to grab the top 10 sample_values,
-//     // otu_ids, and labels (10 each).
-// }
-
-// function init() {
-//   // Grab a reference to the dropdown select element
-//   var selector = d3.select("#selDataset");
-
-//   // Use the list of sample names to populate the select options
-//   d3.json("/variety").then((data) => {
-//     var sampleNames = data.names;
-
-//     sampleNames.forEach((sample) => {
-//       selector
-//         .append("option")
-//         .text(sample)
-//         .property("value", sample);
-//     });
-
-//     // Use the first sample from the list to build the initial plots
-//     var firstSample = sampleNames[0];
-//     buildCharts(firstSample);
-//     buildMetadata(firstSample);
-//   });
-// }
-
-// function optionChanged(newSample) {
-//   // Fetch new data each time a new sample is selected
-//   buildCharts(newSample);
-//   buildMetadata(newSample);
-// }
-
-// // Initialize the dashboard
-// init();
